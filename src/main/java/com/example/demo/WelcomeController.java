@@ -1,16 +1,17 @@
 package com.example.demo;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.concurrent.atomic.AtomicLong;
 
 public class WelcomeController {
-    private static final String template = "Hello, %s!";
-    private final AtomicLong counter = new AtomicLong();
+    @GetMapping("/Welcome")
+    @ResponseBody
+    public String Welcome(@RequestParam(required = false) String naam){
 
-    @PostMapping("/Welcome")
-    public Welcome welcome(@RequestParam(value = "name", defaultValue = "World") String name) {
-        return new Welcome(counter.incrementAndGet(), String.format(template, name));
+        return "Welcome " + naam ;
     }
 }
